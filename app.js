@@ -1,3 +1,5 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import express from 'express';
 import path from 'path';
 import { dirname } from 'node:path';
@@ -18,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
 
 // MongoDB connection
-const uri = "mongodb+srv://joe:joe@cluster0.5abxx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MONGO_URI;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -78,9 +80,9 @@ async function initParkingData() {
 }
 
 // Uncomment the following line to initialize parking data
-// initParkingData().catch(console.dir);
+initParkingData().catch(console.dir);
 
-mongoCollection.deleteMany({})
+// mongoCollection.deleteMany({})
 
 
 // MongoDB connection test
@@ -100,7 +102,7 @@ async function run() {
 // Route to render index.ejs
 app.get('/', (req, res) => {
   try {
-    res.render('index', { pageTitle: "Parking App" }); // Pass pageTitle to the view
+    res.render('index', { pageTitle: "myapp" }); // Pass pageTitle to the view
   } catch (error) {
     console.error("Error rendering index.ejs:", error);
     res.status(500).send("Internal Server Error");

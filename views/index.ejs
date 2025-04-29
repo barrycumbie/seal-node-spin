@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- 
+author: barry
+version: whatever
+best viewed: chrome
+TESTS:
+1/ ran through Nu validator: no errors!https://validator.w3.org/nu
+2/ ran on an incognito window: functional and imgs and resources all loaded! 
+3/ copied and pasted text into word proc, checked spelling and corrected misspell of hallelujah 
+4/ didn't check web safe colors...when I publish to internet can use: https://webaim.org/resources/contrastchecker/
+5/ check rubric! (didn't do *new code* OR last link!)
+
+👆🏻 I moved this up from where codePen put it in the body, makes more sense up near the top here
+-->
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <!-- todo: update html title in head ✅ done!-->
+  <!-- 👇🏼 a better name than my codePen --> 
+  <title><%= pageTitle %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+  <!-- 👇🏼 this link is obsolete since we put all that css code as an internal stylesheet, but won't hurt anything to leave in for now -->
+  <link rel="stylesheet" href="./styles/parkStyle.css">
+  <!-- Add Bootstrap Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- 👇🏼 codePen stuff...I'll leave for now, not hurting anything --> 
+<!-- partial:index.partial.html -->
+
+<h1>Barry's Parking Log 🦭</h1><!-- 👈🏻 my "brand" & mascot -->
+
+<p>This is a list of my parking experience in the Spring of 2025 at
+  <a href="https://una.edu/" target="_blank">UNA</a>.
+</p><!-- my description + onelink (out of three)! --> 
+
+<!-- Form to save parking data -->
+<ul class="list-group">
+  <li class="list-group-item">
+    <form action="/saveParkingData" method="POST">
+      <div class="shadow-sm m-1 p-3 bg-info rounded">
+        <label for="whereParkedInput" class="form-label">Where'd ya park, bruh?</label>
+        <input type="text" class="form-control" id="whereParkedInput" name="whereParked" aria-describedby="whereParkedHelp" required>
+        <div id="whereParkedHelp" class="form-text">Tell us anything: date, time, weather, etc.</div>
+        <button type="submit" class="btn btn-outline-primary">Save Parking Data</button>
+      </div>
+    </form>
+  </li>
+</ul>
+
+<ul id="dataSpot" class="list-group"></ul>
+
+<!-- Links -->
+<p>Links to the <a href="https://codepen.io/barrycumbie/pen/LEPmgdB" target="_blank">original codepen</a> & here's my wireframe too:</p>
+<img src="https://gist.github.com/user-attachments/assets/bf3a236b-f75e-4dbd-9e54-f0319ba2c39b" alt="wireframe">
+
+  <!-- 👇🏼script libraries, jQuery first, all in their own line -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js'></script>
+  <script  src="./scripts/readParkData.js"></script><!-- 👈🏻 don't need but no prob for right now -->
+
+  <script> 
+    // $ = jQ land
+      // $( stuff in here ) = js selector (same as css)
+      // document = DOM, O is for Object 
+      // .ready() is a method() for the document
+      // stuff inside the .ready parenthesis = parameter 
+      // this stutff: function(){} ... IIFE, immediatley invoked f/n expression
+
+      $(document).ready(function () {
+        //code goes here 
+
+        $("#saveParking").on("click", function () {
+          //call f/n
+          let statusText = underConstruction("not ready");      //update the status
+          $("#saveParking").text(statusText).prop("disabled", true);
+
+        });
+
+        //pass a status (ready or not ready) and get back a message for user
+        //rn, not ready 
+        function underConstruction(status) {
+          return "not yet ready, bruh"
+        };
+      }
+      );
+
+
+
+      // var el = document.getElementById("myBody").style.color = "magenta"; 
+
+      // document.body.style.backgroundColor = "magenta";
+
+      // var el = document.getElementById("firstLog"); 
+      // el.innerText = "who cares about barrys parkign";
+
+      // $("body").css("background-color", "yellow");
+
+      // $("#firstLog").css("background-color", "brown");
+
+      // document.getElementById("myP").style.color = "magenta";
+  </script>
+</body>
+</html>
